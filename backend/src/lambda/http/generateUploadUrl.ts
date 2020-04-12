@@ -1,7 +1,7 @@
 import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
-import { AwsS3 } from '../../lib/awsS3'
+import { AwsS3 } from '../../lib/s3'
 import { CreateSignedURLRequest } from '../../requests/CreateSignedURLRequest'
 import { constructResponse } from '../../lib/response'
 import { constructError } from '../../lib/error'
