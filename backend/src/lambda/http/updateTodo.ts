@@ -6,7 +6,7 @@ import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
 import { constructError } from '../../lib/error'
 import { DynamoDB } from '../../lib/dynamodb'
 import { getUserId } from '../utils'
-// import { constructResponse } from '../../lib/response'
+import { constructResponse } from '../../lib/response'
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
 
@@ -32,14 +32,6 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   await dynamoDB.updateItem(todoId, userId, updatedTodo);
 
   // Send response to client
-  // return constructResponse(200, {});
-  return {
-    statusCode: 200,
-    headers: {
-       'Access-Control-Allow-Origin': '*',
-       'Access-Control-Allow-Credentials': true
-    },
-    body: JSON.stringify({})
- };
+  return constructResponse(200, {});
 
 }

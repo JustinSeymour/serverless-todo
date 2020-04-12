@@ -105,9 +105,14 @@ functions:
     iamRoleStatements:
       - Effect: Allow
         Action: 
-          - s3:*
+          - s3:'*'
         Resource: 
           - arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*
+      - Effect: Allow
+        Action:
+          - dynamodb:updateItem
+        Resource:
+          - arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
 
 resources:
   Resources:
@@ -152,7 +157,7 @@ resources:
               ProjectionType: ALL
 
     # S3 Bucket
-    AttachmentBucket:
+    AttachmentsBucket:
       Type: AWS::S3::Bucket
       Properties:
         BucketName: ${self:provider.environment.S3_BUCKET}
@@ -174,7 +179,6 @@ resources:
     BucketPolicy:
       Type: AWS::S3::BucketPolicy
       Properties:
-        Bucket: !Ref AttachmentBucket
         PolicyDocument:
           Id: Policy
           Version: '2012-10-17'
@@ -182,9 +186,10 @@ resources:
             - Sid: PublicReadWriteBucketPolicy
               Effect: Allow
               Principal: '*' # Anyone
-              Action:
-                - 's3:GetObject'
-                - 's3:PutObject'
+              Action: 
+                - s3:GetObject
+                - s3:PutObject
               Resource: 'arn:aws:s3:::${self:provider.environment.S3_BUCKET}/*'
+        Bucket: !Ref AttachmentsBucket
               
             

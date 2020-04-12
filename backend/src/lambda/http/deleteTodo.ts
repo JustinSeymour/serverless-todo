@@ -1,10 +1,10 @@
 import 'source-map-support/register'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
-import { DynamoDB } from './../../lib/dynamodb';
-import { constructError } from './../../lib/error';
-// import { constructResponse } from './../../lib/response';
-import { getUserId } from '../utils';
+import { DynamoDB } from './../../lib/dynamodb'
+import { constructError } from './../../lib/error'
+import { constructResponse } from './../../lib/response'
+import { getUserId } from '../utils'
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
 
@@ -35,15 +35,6 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   await dynamodb.deleteItem(todoId, userId);
 
   // Construct and return successful Response
-  // let response = constructResponse(201, {})
-  // return response;
-  return {
-    statusCode: 201,
-    headers: {
-       'Access-Control-Allow-Origin': '*',
-       'Access-Control-Allow-Credentials': true
-    },
-    body: JSON.stringify({})
- };
+  return constructResponse(201, {});
 
 }

@@ -37,13 +37,5 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   await dynamoDb.creatItem(todoItem);
 
   return constructResponse(201, {item: todoItem});
-//   return {
-//     statusCode: 201,
-//     headers: {
-//        'Access-Control-Allow-Origin': '*',
-//        'Access-Control-Allow-Credentials': true
-//     },
-//     body: JSON.stringify({item: todoItem})
-//  };
 
 }

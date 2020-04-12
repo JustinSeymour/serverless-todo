@@ -76,10 +76,7 @@ export class DynamoDB {
    async getAll(userId, indexName) {
 
       try {
-
-         console.log("In get all  \n");
          
-   
          const result = await docClient.query({
             TableName: this.table,
             IndexName: indexName,
@@ -88,8 +85,6 @@ export class DynamoDB {
                 ':userId': userId
             }
         }).promise();
-
-        console.log("In get all after query  \n");
   
         return result.Items;
    
